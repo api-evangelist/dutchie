@@ -1,0 +1,172 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Dutchie Plus GraphQL API",
+    "version": "2021-07",
+    "description": "Dutchie Plus headless cannabis-commerce GraphQL API. All requests are HTTPS POST of a GraphQL query/variables body to https://plus.dutchie.com/plus/2021-07/graphql, authenticated with a per-retailer Bearer API key. [CONFIRMED] operations appear in GetDutchie/dutchie-plus-nextjs-example; [MODELED] operations are referenced in Dutchie Plus docs. Note: Dutchie has announced a 2026 sunset of the Plus headless commerce API."
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{dutchiePlusKey}}"
+    }
+  },
+  "items": [
+    {
+      "info": { "name": "Menu & Products", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Menu (products) [CONFIRMED]", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://plus.dutchie.com/plus/2021-07/graphql",
+            "headers": [
+              { "name": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{\"query\":\"query Menu($category: Category) { menu(filter: { category: $category }, pagination: { limit: 12, offset: 0 }) { products { id name description image category strainType brand { name } potencyThc { formatted } potencyCbd { formatted } variants { option priceRec priceMed specialPriceRec specialPriceMed } } } }\",\"variables\":{\"category\":\"FLOWER\"}}"
+            }
+          },
+          "docs": "Return a page of products for the scoped retailer's menu."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Retailers", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Retailers [MODELED]", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://plus.dutchie.com/plus/2021-07/graphql",
+            "headers": [
+              { "name": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{\"query\":\"query Retailers { retailers { id name slug status offerDelivery offerAnyPickup pricingTypes address { line1 city state postalCode } } }\",\"variables\":{}}"
+            }
+          },
+          "docs": "List dispensaries/retailers on the account. Modeled from the 2021-07 schema."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Specials", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Specials [MODELED]", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://plus.dutchie.com/plus/2021-07/graphql",
+            "headers": [
+              { "name": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{\"query\":\"query Specials { specials { id name description type startDate endDate } }\",\"variables\":{}}"
+            }
+          },
+          "docs": "List a retailer's active specials/deals. Modeled from the 2021-07 schema."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Checkout", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Create Checkout [CONFIRMED]", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://plus.dutchie.com/plus/2021-07/graphql",
+            "headers": [
+              { "name": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{\"query\":\"mutation CreateCheckout($orderType: OrderType!, $pricingType: PricingType!) { createCheckout(orderType: $orderType, pricingType: $pricingType) { id orderType pricingType redirectUrl items { id option quantity } } }\",\"variables\":{\"orderType\":\"DELIVERY\",\"pricingType\":\"RECREATIONAL\"}}"
+            }
+          },
+          "docs": "Create a new checkout for an order type and pricing type."
+        },
+        {
+          "info": { "name": "Add Item to Checkout [CONFIRMED]", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://plus.dutchie.com/plus/2021-07/graphql",
+            "headers": [
+              { "name": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{\"query\":\"mutation AddItemToCheckout($checkoutId: ID!, $productId: ID!, $quantity: Int!, $option: String!) { addItem(checkoutId: $checkoutId, productId: $productId, quantity: $quantity, option: $option) { id items { id option quantity product { name } } } }\",\"variables\":{\"checkoutId\":\"\",\"productId\":\"\",\"quantity\":1,\"option\":\"3.5g\"}}"
+            }
+          },
+          "docs": "Add a product variant to a checkout."
+        },
+        {
+          "info": { "name": "Update Checkout Item Quantity [CONFIRMED]", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://plus.dutchie.com/plus/2021-07/graphql",
+            "headers": [
+              { "name": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{\"query\":\"mutation UpdateCheckoutItemQuantity($checkoutId: ID!, $itemId: ID!, $quantity: Int!) { updateQuantity(checkoutId: $checkoutId, itemId: $itemId, quantity: $quantity) { id items { id quantity } } }\",\"variables\":{\"checkoutId\":\"\",\"itemId\":\"\",\"quantity\":2}}"
+            }
+          },
+          "docs": "Update the quantity of a checkout line item."
+        },
+        {
+          "info": { "name": "Remove Item from Checkout [CONFIRMED]", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://plus.dutchie.com/plus/2021-07/graphql",
+            "headers": [
+              { "name": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{\"query\":\"mutation RemoveItemFromCheckout($checkoutId: ID!, $itemId: ID!) { removeItem(checkoutId: $checkoutId, itemId: $itemId) { id items { id } } }\",\"variables\":{\"checkoutId\":\"\",\"itemId\":\"\"}}"
+            }
+          },
+          "docs": "Remove a line item from a checkout."
+        },
+        {
+          "info": { "name": "Update Checkout (order/pricing type) [CONFIRMED]", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://plus.dutchie.com/plus/2021-07/graphql",
+            "headers": [
+              { "name": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{\"query\":\"mutation UpdateCheckout($checkoutId: ID!, $orderType: OrderType!, $pricingType: PricingType!) { updateCheckout(checkoutId: $checkoutId, orderType: $orderType, pricingType: $pricingType) { id orderType pricingType } }\",\"variables\":{\"checkoutId\":\"\",\"orderType\":\"PICKUP\",\"pricingType\":\"RECREATIONAL\"}}"
+            }
+          },
+          "docs": "Update a checkout's order type and pricing type."
+        },
+        {
+          "info": { "name": "Get Checkout [CONFIRMED]", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://plus.dutchie.com/plus/2021-07/graphql",
+            "headers": [
+              { "name": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{\"query\":\"query Checkout($id: ID!) { checkout(id: $id) { id orderType pricingType redirectUrl items { id option quantity product { name } } } }\",\"variables\":{\"id\":\"\"}}"
+            }
+          },
+          "docs": "Retrieve an existing checkout by id."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,188 @@
+{
+  "info": {
+    "_postman_id": "b7d2f0a1-9c4e-4a6f-9f2e-2d1c3b4a5e60",
+    "name": "Dutchie Plus GraphQL API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Dutchie Plus headless cannabis-commerce GraphQL API (version 2021-07). All requests are HTTPS POST of a GraphQL query/variables body to https://plus.dutchie.com/plus/2021-07/graphql, authenticated with a per-retailer Bearer API key.\n\nOperations marked [CONFIRMED] appear in the official GetDutchie/dutchie-plus-nextjs-example; [MODELED] operations are referenced in Dutchie Plus docs / the 2021-07 schema.\n\nNote: Dutchie has announced a 2026 sunset of the Plus headless commerce API.",
+      "type": "text/plain"
+    }
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{dutchiePlusKey}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://plus.dutchie.com/plus/2021-07/graphql"
+    },
+    {
+      "key": "dutchiePlusKey",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "Menu & Products",
+      "item": [
+        {
+          "name": "Menu (products) [CONFIRMED]",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": { "raw": "{{baseUrl}}", "host": ["{{baseUrl}}"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"query Menu($category: Category) { menu(filter: { category: $category }, pagination: { limit: 12, offset: 0 }) { products { id name description image category strainType brand { name } potencyThc { formatted } potencyCbd { formatted } variants { option priceRec priceMed specialPriceRec specialPriceMed } } } }\",\n  \"variables\": { \"category\": \"FLOWER\" }\n}"
+            },
+            "description": "Return a page of products for the scoped retailer's menu."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Retailers",
+      "item": [
+        {
+          "name": "Retailers [MODELED]",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": { "raw": "{{baseUrl}}", "host": ["{{baseUrl}}"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"query Retailers { retailers { id name slug status offerDelivery offerAnyPickup pricingTypes address { line1 city state postalCode } } }\",\n  \"variables\": {}\n}"
+            },
+            "description": "List dispensaries/retailers on the account. Modeled from the 2021-07 schema."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Specials",
+      "item": [
+        {
+          "name": "Specials [MODELED]",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": { "raw": "{{baseUrl}}", "host": ["{{baseUrl}}"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"query Specials { specials { id name description type startDate endDate } }\",\n  \"variables\": {}\n}"
+            },
+            "description": "List a retailer's active specials/deals. Modeled from the 2021-07 schema."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Checkout",
+      "item": [
+        {
+          "name": "Create Checkout [CONFIRMED]",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": { "raw": "{{baseUrl}}", "host": ["{{baseUrl}}"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"mutation CreateCheckout($orderType: OrderType!, $pricingType: PricingType!) { createCheckout(orderType: $orderType, pricingType: $pricingType) { id orderType pricingType redirectUrl items { id option quantity } } }\",\n  \"variables\": { \"orderType\": \"DELIVERY\", \"pricingType\": \"RECREATIONAL\" }\n}"
+            },
+            "description": "Create a new checkout for an order type and pricing type."
+          }
+        },
+        {
+          "name": "Add Item to Checkout [CONFIRMED]",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": { "raw": "{{baseUrl}}", "host": ["{{baseUrl}}"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"mutation AddItemToCheckout($checkoutId: ID!, $productId: ID!, $quantity: Int!, $option: String!) { addItem(checkoutId: $checkoutId, productId: $productId, quantity: $quantity, option: $option) { id items { id option quantity product { name } } } }\",\n  \"variables\": { \"checkoutId\": \"\", \"productId\": \"\", \"quantity\": 1, \"option\": \"3.5g\" }\n}"
+            },
+            "description": "Add a product variant to a checkout."
+          }
+        },
+        {
+          "name": "Update Checkout Item Quantity [CONFIRMED]",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": { "raw": "{{baseUrl}}", "host": ["{{baseUrl}}"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"mutation UpdateCheckoutItemQuantity($checkoutId: ID!, $itemId: ID!, $quantity: Int!) { updateQuantity(checkoutId: $checkoutId, itemId: $itemId, quantity: $quantity) { id items { id quantity } } }\",\n  \"variables\": { \"checkoutId\": \"\", \"itemId\": \"\", \"quantity\": 2 }\n}"
+            },
+            "description": "Update the quantity of a checkout line item."
+          }
+        },
+        {
+          "name": "Remove Item from Checkout [CONFIRMED]",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": { "raw": "{{baseUrl}}", "host": ["{{baseUrl}}"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"mutation RemoveItemFromCheckout($checkoutId: ID!, $itemId: ID!) { removeItem(checkoutId: $checkoutId, itemId: $itemId) { id items { id } } }\",\n  \"variables\": { \"checkoutId\": \"\", \"itemId\": \"\" }\n}"
+            },
+            "description": "Remove a line item from a checkout."
+          }
+        },
+        {
+          "name": "Update Checkout (order/pricing type) [CONFIRMED]",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": { "raw": "{{baseUrl}}", "host": ["{{baseUrl}}"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"mutation UpdateCheckout($checkoutId: ID!, $orderType: OrderType!, $pricingType: PricingType!) { updateCheckout(checkoutId: $checkoutId, orderType: $orderType, pricingType: $pricingType) { id orderType pricingType } }\",\n  \"variables\": { \"checkoutId\": \"\", \"orderType\": \"PICKUP\", \"pricingType\": \"RECREATIONAL\" }\n}"
+            },
+            "description": "Update a checkout's order type and pricing type."
+          }
+        },
+        {
+          "name": "Get Checkout [CONFIRMED]",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": { "raw": "{{baseUrl}}", "host": ["{{baseUrl}}"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"query Checkout($id: ID!) { checkout(id: $id) { id orderType pricingType redirectUrl items { id option quantity product { name } } } }\",\n  \"variables\": { \"id\": \"\" }\n}"
+            },
+            "description": "Retrieve an existing checkout by id."
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,84 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Dutchie
+providerId: dutchie
+created: '2026-07-03'
+modified: '2026-07-03'
+reconciled: false
+tags:
+- Cannabis
+- Dispensary
+- Ecommerce
+- Headless Commerce
+- GraphQL
+- Plans
+description: >-
+  Dutchie Plus is an enterprise headless-commerce product sold to dispensaries and
+  multi-state operators (MSOs), not a self-serve, publicly-priced developer API.
+  Access to the Dutchie Plus GraphQL API is provisioned per retailer as part of a
+  Dutchie ecommerce/POS subscription; a per-retailer Bearer API key is issued to
+  the account. There is no published pay-as-you-go or per-call price list - pricing
+  is quote-based via Dutchie sales and typically bundled with the broader Dutchie
+  platform (POS, Ecommerce, Payments). Note - Dutchie has announced a 2026 sunset
+  of the Plus headless commerce API, with a deprecation runway for existing
+  enterprise customers.
+notes: >-
+  No public pricing is documented for Dutchie Plus. Values below reflect the
+  contact-sales, per-retailer licensing model; confirm current terms and the Plus
+  sunset timeline with Dutchie during reconciliation.
+sources:
+- https://dutchie.com/plus
+- https://plus.dutchie.com/plus/docs
+- https://business.dutchie.com
+plans:
+- id: dutchie-plus-enterprise
+  name: Dutchie Plus (Enterprise Headless Commerce)
+  type: enterprise
+  description: >-
+    Quote-based license for the Dutchie Plus headless GraphQL commerce API,
+    provisioned per retailer as part of a Dutchie ecommerce agreement. Includes
+    the menu, retailers, specials, and checkout GraphQL surface and a per-retailer
+    API key.
+  entries:
+  - label: Dutchie Plus License
+    name: dutchie_plus_license
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: US
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: Menu & Products GraphQL API
+  - name: Retailers GraphQL API
+  - name: Specials GraphQL API
+  - name: Checkout / Cart GraphQL API
+  - name: Custom headless storefront (SSR/SSG)
+- id: dutchie-platform
+  name: Dutchie Platform (POS / Ecommerce / Payments)
+  type: enterprise
+  description: >-
+    Broader Dutchie dispensary platform that Dutchie Plus is typically bundled
+    with - point of sale, hosted ecommerce menus, and payments. Priced by
+    contract per dispensary/location.
+  entries:
+  - label: Platform Subscription
+    name: platform_subscription
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: month
+    geo: US
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: Point of Sale
+  - name: Ecommerce
+  - name: Payments
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

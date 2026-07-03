@@ -1,0 +1,138 @@
+aid: dutchie
+url: https://raw.githubusercontent.com/api-evangelist/dutchie/refs/heads/main/apis.yml
+name: Dutchie
+kind: company
+description: Dutchie is a cannabis retail technology platform providing point of sale,
+  ecommerce, and payments for dispensaries. Its headless commerce product, Dutchie
+  Plus, exposes a GraphQL API (endpoint https://plus.dutchie.com/plus/2021-07/graphql)
+  that lets developers build fully custom, branded dispensary storefronts against
+  Dutchie's ecommerce backend - querying retailer menus, products, variants, potency,
+  and specials, and driving a stateful cart/checkout that respects cannabis
+  compliance, inventory, taxes, and per-state rules. Requests are GraphQL POST
+  operations authenticated with a per-retailer Bearer API key. Note - Dutchie has
+  announced a 2026 sunset/deprecation of the Plus headless commerce API.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Cannabis
+- Dispensary
+- Retail
+- Ecommerce
+- Point of Sale
+- Headless Commerce
+- GraphQL
+- Menu
+- Checkout
+created: '2026-07-03'
+modified: '2026-07-03'
+specificationVersion: '0.19'
+apis:
+- aid: dutchie:dutchie-plus-retailers-api
+  name: Dutchie Plus Retailers API
+  tags:
+  - Retailers
+  - Dispensaries
+  - Locations
+  - GraphQL
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://plus.dutchie.com/plus/docs
+  baseURL: https://plus.dutchie.com/plus/2021-07/graphql
+  properties:
+  - url: https://plus.dutchie.com/plus/docs
+    type: Documentation
+  - url: graphql/dutchie-graphql.md
+    type: GraphQL
+  - url: graphql/dutchie-schema.graphql
+    type: GraphQL
+  description: GraphQL queries for the dispensaries/retailers connected to your Dutchie
+    Plus account - retailer metadata, address, hours, accepted order types
+    (pickup/delivery), and pricing types (recreational/medical). Retailers are the
+    scope every menu, specials, and checkout operation runs against. Modeled from
+    the Dutchie Plus 2021-07 schema and documentation; the retailer scope is
+    established by the per-retailer API key.
+- aid: dutchie:dutchie-plus-menu-api
+  name: Dutchie Plus Menu API
+  tags:
+  - Menu
+  - Products
+  - Variants
+  - Inventory
+  - GraphQL
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://plus.dutchie.com/plus/docs
+  baseURL: https://plus.dutchie.com/plus/2021-07/graphql
+  properties:
+  - url: https://plus.dutchie.com/plus/docs
+    type: Documentation
+  - url: graphql/dutchie-graphql.md
+    type: GraphQL
+  - url: graphql/dutchie-schema.graphql
+    type: GraphQL
+  description: The core headless-storefront query. `menu(filter, pagination)` returns
+    a retailer's live product catalog - each Product carries brand, category,
+    strainType, description, image, CBD/THC potency, and priced variants (option,
+    priceRec, priceMed, and special prices). Filter by Category and paginate with
+    limit/offset. Confirmed against the official Dutchie Plus Next.js example.
+- aid: dutchie:dutchie-plus-specials-api
+  name: Dutchie Plus Specials API
+  tags:
+  - Specials
+  - Deals
+  - Promotions
+  - Discounts
+  - GraphQL
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://plus.dutchie.com/plus/docs
+  baseURL: https://plus.dutchie.com/plus/2021-07/graphql
+  properties:
+  - url: https://plus.dutchie.com/plus/docs
+    type: Documentation
+  - url: graphql/dutchie-graphql.md
+    type: GraphQL
+  - url: graphql/dutchie-schema.graphql
+    type: GraphQL
+  description: GraphQL queries for a retailer's active specials, deals, and
+    promotions - the discount programs surfaced on the menu that produce the
+    special variant prices (specialPriceRec / specialPriceMed) returned by the Menu
+    API. Modeled from the Dutchie Plus 2021-07 schema and documentation; the
+    special pricing fields themselves are confirmed on the Product variant type.
+- aid: dutchie:dutchie-plus-checkout-api
+  name: Dutchie Plus Checkout API
+  tags:
+  - Checkout
+  - Cart
+  - Orders
+  - Compliance
+  - GraphQL
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://plus.dutchie.com/plus/docs
+  baseURL: https://plus.dutchie.com/plus/2021-07/graphql
+  properties:
+  - url: https://plus.dutchie.com/plus/docs
+    type: Documentation
+  - url: graphql/dutchie-graphql.md
+    type: GraphQL
+  - url: graphql/dutchie-schema.graphql
+    type: GraphQL
+  description: The stateful cart and order lifecycle via GraphQL mutations -
+    `createCheckout`, `addItem`, `updateQuantity`, `removeItem`, and
+    `updateCheckout` (order type / pricing type), plus the `checkout(id)` query. A
+    Checkout tracks its Items and returns a `redirectUrl` used to complete the
+    compliant order. Confirmed against the official Dutchie Plus Next.js example.
+common:
+- type: GitHubOrganization
+  url: https://github.com/GetDutchie
+- type: LinkedIn
+  url: https://www.linkedin.com/company/dutchie
+- type: Website
+  url: https://dutchie.com
+- type: Documentation
+  url: https://plus.dutchie.com/plus/docs
+- type: Plans
+  url: plans/dutchie-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/dutchie-rate-limits.yml
+- type: FinOps
+  url: finops/dutchie-finops.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

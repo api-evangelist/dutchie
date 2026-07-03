@@ -1,0 +1,265 @@
+"""
+Dutchie Plus GraphQL Schema (API version 2021-07)
+
+Endpoint: https://plus.dutchie.com/plus/2021-07/graphql
+Transport: GraphQL over HTTPS POST
+Auth: Authorization: Bearer <retailer API key>
+
+Dutchie Plus is Dutchie's headless cannabis-commerce API. This SDL is grounded
+in the official Dutchie Plus Next.js example (GetDutchie/dutchie-plus-nextjs-example),
+which uses the confirmed operations and types below, plus Dutchie Plus product
+documentation.
+
+Provenance:
+  [CONFIRMED] = present verbatim in the official example repo's .graphql documents.
+  [MODELED]   = referenced in Dutchie Plus docs / the 2021-07 schema but not
+                exercised by the example repo; field names are representative.
+
+NOTE: Dutchie has announced a 2026 sunset/deprecation of the Plus headless
+commerce API.
+"""
+
+# ─────────────────────────────────────────────
+# Enums
+# ─────────────────────────────────────────────
+
+"[CONFIRMED] Product category taxonomy used by menu filtering."
+enum Category {
+  FLOWER
+  VAPORIZERS
+  CONCENTRATES
+  EDIBLES
+  TINCTURES
+  TOPICALS
+  ACCESSORIES
+  APPAREL
+  CBD
+  CLONES
+  PRE_ROLLS
+  SEEDS
+  NOT_APPLICABLE
+}
+
+"[CONFIRMED] Cannabis strain classification."
+enum StrainType {
+  SATIVA
+  HYBRID
+  INDICA
+  HIGH_CBD
+}
+
+"[CONFIRMED] Fulfillment method for a checkout."
+enum OrderType {
+  PICKUP
+  DELIVERY
+}
+
+"[CONFIRMED] Menu pricing context (drives priceRec vs priceMed)."
+enum PricingType {
+  RECREATIONAL
+  MEDICAL
+}
+
+# ─────────────────────────────────────────────
+# Scalars
+# ─────────────────────────────────────────────
+
+scalar DateTime
+
+# ─────────────────────────────────────────────
+# Menu & Product Types
+# ─────────────────────────────────────────────
+
+"[CONFIRMED] A single purchasable product on a retailer's menu."
+type Product {
+  id: ID!
+  name: String!
+  description: String
+  image: String
+  category: Category
+  strainType: StrainType
+  brand: Brand
+  potencyThc: Potency
+  potencyCbd: Potency
+  variants: [Variant!]!
+}
+
+"[CONFIRMED] Brand a product belongs to."
+type Brand {
+  "[MODELED] Stable identifier for the brand."
+  id: ID
+  name: String!
+}
+
+"[CONFIRMED] A formatted potency measurement (e.g. THC / CBD)."
+type Potency {
+  formatted: String
+  "[MODELED] Raw numeric potency value."
+  value: Float
+  "[MODELED] Unit for the value, e.g. PERCENTAGE or MILLIGRAMS."
+  unit: String
+}
+
+"[CONFIRMED] A priced size/option of a product (e.g. 1g, 3.5g, each)."
+type Variant {
+  option: String!
+  priceRec: Float
+  priceMed: Float
+  specialPriceRec: Float
+  specialPriceMed: Float
+  "[MODELED] Live inventory quantity for this variant."
+  quantity: Int
+}
+
+"[CONFIRMED] A page of products for a retailer's menu."
+type Menu {
+  products: [Product!]!
+  "[MODELED] Total products matching the filter, for pagination."
+  totalCount: Int
+}
+
+"[CONFIRMED] Filter input for the menu query."
+input MenuFilter {
+  category: Category
+  "[MODELED] Free-text product search."
+  search: String
+  "[MODELED] Restrict to products on special."
+  isSpecial: Boolean
+  "[MODELED] Restrict to a strain type."
+  strainType: StrainType
+}
+
+"[CONFIRMED] Offset pagination input."
+input Pagination {
+  limit: Int
+  offset: Int
+}
+
+# ─────────────────────────────────────────────
+# Retailer / Dispensary Types  [MODELED]
+# ─────────────────────────────────────────────
+
+"[MODELED] A dispensary/retailer connected to the Dutchie Plus account."
+type Retailer {
+  id: ID!
+  name: String!
+  slug: String
+  status: String
+  address: Address
+  phone: String
+  email: String
+  timezone: String
+  offerAnyPickup: Boolean
+  offerDelivery: Boolean
+  hours: [RetailerHours!]
+  pricingTypes: [PricingType!]
+}
+
+"[MODELED] A physical address for a retailer."
+type Address {
+  line1: String
+  line2: String
+  city: String
+  state: String
+  postalCode: String
+  country: String
+  latitude: Float
+  longitude: Float
+}
+
+"[MODELED] Operating hours for a retailer, per fulfillment type."
+type RetailerHours {
+  day: String
+  startTime: String
+  endTime: String
+  orderType: OrderType
+}
+
+# ─────────────────────────────────────────────
+# Specials / Deals Types  [MODELED]
+# ─────────────────────────────────────────────
+
+"[MODELED] An active promotion/deal for a retailer that produces special prices."
+type Special {
+  id: ID!
+  name: String!
+  description: String
+  type: String
+  startDate: DateTime
+  endDate: DateTime
+  menuScope: String
+}
+
+# ─────────────────────────────────────────────
+# Checkout / Cart Types
+# ─────────────────────────────────────────────
+
+"[CONFIRMED] A stateful cart/checkout for one retailer."
+type Checkout {
+  id: ID!
+  items: [Item!]!
+  orderType: OrderType
+  pricingType: PricingType
+  "[CONFIRMED] URL used to complete the compliant order."
+  redirectUrl: String
+  "[MODELED] Running totals for the checkout."
+  totals: CheckoutTotals
+}
+
+"[CONFIRMED] A line item in a checkout."
+type Item {
+  id: ID!
+  option: String!
+  quantity: Int!
+  product: Product!
+}
+
+"[MODELED] Computed monetary totals for a checkout (subtotal, taxes, total)."
+type CheckoutTotals {
+  subtotal: Float
+  tax: Float
+  discounts: Float
+  total: Float
+}
+
+# ─────────────────────────────────────────────
+# Query Root
+# ─────────────────────────────────────────────
+
+type Query {
+  "[CONFIRMED] Return a page of products for the scoped retailer's menu."
+  menu(filter: MenuFilter, pagination: Pagination): Menu!
+
+  "[CONFIRMED] Retrieve a checkout by id."
+  checkout(id: ID!): Checkout
+
+  "[MODELED] List dispensaries/retailers on the account."
+  retailers: [Retailer!]!
+
+  "[MODELED] Retrieve a single retailer by id."
+  retailer(id: ID!): Retailer
+
+  "[MODELED] List active specials/deals for the scoped retailer."
+  specials: [Special!]!
+}
+
+# ─────────────────────────────────────────────
+# Mutation Root
+# ─────────────────────────────────────────────
+
+type Mutation {
+  "[CONFIRMED] Create a new checkout for an order type and pricing type."
+  createCheckout(orderType: OrderType!, pricingType: PricingType!): Checkout!
+
+  "[CONFIRMED] Add a product variant to a checkout."
+  addItem(checkoutId: ID!, productId: ID!, quantity: Int!, option: String!): Checkout!
+
+  "[CONFIRMED] Update the quantity of a checkout line item."
+  updateQuantity(checkoutId: ID!, itemId: ID!, quantity: Int!): Checkout!
+
+  "[CONFIRMED] Remove a line item from a checkout."
+  removeItem(checkoutId: ID!, itemId: ID!): Checkout!
+
+  "[CONFIRMED] Update a checkout's order type and pricing type."
+  updateCheckout(checkoutId: ID!, orderType: OrderType!, pricingType: PricingType!): Checkout!
+}

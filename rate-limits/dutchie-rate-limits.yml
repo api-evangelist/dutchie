@@ -1,0 +1,61 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Dutchie
+providerId: dutchie
+created: '2026-07-03'
+modified: '2026-07-03'
+reconciled: false
+tags:
+- Cannabis
+- Dispensary
+- Ecommerce
+- GraphQL
+- Rate Limiting
+- Quotas
+- Throttling
+description: >-
+  Dutchie does not publish specific rate limits for the Dutchie Plus GraphQL API.
+  As an enterprise, per-retailer API, throttling is applied at Dutchie's
+  discretion per API key and is expected to protect the shared ecommerce backend.
+  GraphQL requests are HTTPS POST operations to
+  https://plus.dutchie.com/plus/2021-07/graphql; clients should expect standard
+  HTTP 429 responses when throttled and should cache menu reads and back off on
+  checkout mutations. Specific numeric limits are not documented publicly and are
+  not reconciled in this artifact.
+notes: >-
+  No public rate-limit numbers are documented for Dutchie Plus. Confirm per-key
+  quotas, burst limits, and any GraphQL query-complexity limits directly with
+  Dutchie during reconciliation.
+sources:
+- https://plus.dutchie.com/plus/docs
+- https://dutchie.com/plus
+responseCodes:
+  throttled: 429
+limits:
+- name: Requests Per Key
+  scope: api_key
+  metric: requests
+  limit: see provider documentation
+  notes: >-
+    Per-retailer API key throttling applied at Dutchie's discretion; specific
+    RPM/RPS values are not published.
+- name: GraphQL Query Complexity
+  scope: api_key
+  metric: query_cost
+  limit: see provider documentation
+  notes: >-
+    GraphQL APIs commonly enforce query depth/complexity limits; Dutchie does not
+    publish specific thresholds.
+policies:
+- name: Caching
+  description: >-
+    Cache retailer menu and specials reads client-side / at the edge to reduce
+    request volume against the shared ecommerce backend.
+- name: Backoff Strategy
+  description: >-
+    Implement exponential backoff with jitter on HTTP 429 and avoid rapid repeat
+    checkout mutations.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,97 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Dutchie
+providerId: dutchie
+created: '2026-07-03'
+modified: '2026-07-03'
+reconciled: false
+tags:
+- Cannabis
+- Dispensary
+- Ecommerce
+- Headless Commerce
+- GraphQL
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of Dutchie Plus spend. Dutchie Plus is not usage-metered per API
+  call; it is an enterprise, contract-priced headless-commerce license
+  provisioned per retailer as part of a Dutchie ecommerce/POS/payments agreement.
+  Cost is therefore a fixed/committed subscription line item rather than
+  consumption-based token/request billing, so FinOps focus is on license
+  allocation per dispensary/location and on the payments take-rate, not on
+  per-request optimization. Note - Dutchie has announced a 2026 sunset of the Plus
+  headless commerce API, which is itself a cost/migration-planning consideration.
+notes: >-
+  No public consumption pricing exists for Dutchie Plus; meters below are modeled
+  around the enterprise subscription and payments model. Verify contract terms and
+  the Plus sunset/migration timeline with Dutchie during reconciliation.
+sources:
+- https://dutchie.com/plus
+- https://plus.dutchie.com/plus/docs
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Dutchie
+serviceCategory: Commerce and Retail
+billingModel:
+  pricingCategory: Committed
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+  - Purchase
+  - Usage
+  - Adjustment
+focusColumns:
+  ServiceName: Dutchie Plus
+  ServiceCategory: Commerce and Retail
+  ProviderName: Dutchie
+  PublisherName: Dutchie
+  InvoiceIssuerName: Dutchie
+  BillingCurrency: USD
+  ChargeCategory: Purchase
+  PricingCategory: Committed
+meters:
+- name: plus_license
+  description: Fixed per-retailer Dutchie Plus headless-commerce license fee.
+  unit: contract
+  aggregation: sum
+  dimensions:
+  - account
+  - retailer
+- name: platform_subscription
+  description: Dutchie platform subscription (POS / Ecommerce) the Plus license is bundled with.
+  unit: contract
+  aggregation: sum
+  dimensions:
+  - account
+  - location
+- name: payments_volume
+  description: >-
+    Payments processed through Dutchie for orders completed via the checkout flow;
+    priced as a take-rate/per-transaction fee where Dutchie Payments is used.
+  unit: transactions
+  aggregation: sum
+  dimensions:
+  - account
+  - retailer
+principles:
+- name: Visibility
+  description: Track the Dutchie Plus license and platform fees per retailer/location on the Dutchie invoice.
+- name: Allocation
+  description: Map per-retailer API keys and license lines to the dispensary/brand cost center they serve.
+- name: Optimization
+  description: >-
+    Consolidate storefronts per retailer; monitor the Plus 2026 sunset and plan
+    migration cost before end-of-life rather than under deprecation pressure.
+- name: Accountability
+  description: Assign an owner per retailer storefront to review Dutchie fees and payments take-rate against revenue.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

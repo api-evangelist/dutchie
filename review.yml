@@ -1,0 +1,117 @@
+aid: dutchie
+name: Dutchie
+review:
+  question: Does Dutchie expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-03'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was authored. Dutchie's documented public developer
+    surface is the Dutchie Plus headless-commerce GraphQL API, which is
+    request/response only (queries and mutations over HTTPS POST). No GraphQL
+    subscription operations and no WebSocket (ws:// or wss://) transport are
+    documented, so there is no server-push surface to model in AsyncAPI.
+findings:
+  summary: |
+    Dutchie does not publish a documented public WebSocket API. Dutchie is a
+    cannabis retail technology platform (point of sale, ecommerce, payments). Its
+    documented developer API is Dutchie Plus, a headless-commerce GraphQL API at
+    https://plus.dutchie.com/plus/2021-07/graphql, authenticated with a
+    per-retailer Bearer API key. Every operation is a GraphQL query or mutation
+    delivered as an HTTPS POST; the official Dutchie Plus Next.js example uses an
+    Apollo HttpLink (plain HTTP), not a WebSocket/subscription link. No GraphQL
+    Subscription type, ws://, or wss:// endpoint is documented for menus,
+    retailers, specials, or checkout. Cart/checkout is stateful but polled via the
+    checkout(id) query, not pushed. NOTE: Dutchie has announced a 2026 sunset of
+    the Plus headless commerce API.
+  graphqlConfirmed: true
+  transports:
+    - protocol: GraphQL
+      scheme: https
+      baseURL: https://plus.dutchie.com/plus/2021-07/graphql
+      documented: true
+      note: >-
+        GraphQL over HTTPS POST. Bearer (per-retailer API key) auth. Queries
+        (menu, checkout) and mutations (createCheckout, addItem, updateQuantity,
+        removeItem, updateCheckout).
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: >-
+        No WebSocket endpoint and no GraphQL subscription operations are
+        documented for Dutchie Plus as of the review date. The official example
+        app connects with an Apollo HttpLink (HTTP), confirming no subscription
+        transport.
+  endpointsConfirmed:
+    note: >-
+      Confirmed verbatim from the official example repo
+      GetDutchie/dutchie-plus-nextjs-example (.graphql query/mutation/fragment
+      documents). Single GraphQL endpoint; operations are POSTed to it.
+    graphql:
+      - 'query menu(filter: MenuFilter, pagination: Pagination) -> Menu.products [Product]'
+      - 'query checkout(id: ID!) -> Checkout'
+      - 'mutation createCheckout(orderType: OrderType!, pricingType: PricingType!) -> Checkout'
+      - 'mutation addItem(checkoutId: ID!, productId: ID!, quantity: Int!, option: String!) -> Checkout'
+      - 'mutation updateQuantity(checkoutId: ID!, itemId: ID!, quantity: Int!) -> Checkout'
+      - 'mutation removeItem(checkoutId: ID!, itemId: ID!) -> Checkout'
+      - 'mutation updateCheckout(checkoutId: ID!, orderType: OrderType!, pricingType: PricingType!) -> Checkout'
+    confirmedTypes:
+      - Product (id, name, description, image, category, strainType, brand, potencyThc, potencyCbd, variants)
+      - Variant (option, priceRec, priceMed, specialPriceRec, specialPriceMed)
+      - Brand (name)
+      - Potency (formatted)
+      - Checkout (id, items, orderType, pricingType, redirectUrl)
+      - Item (id, option, quantity, product)
+    confirmedEnums:
+      - Category (FLOWER, VAPORIZERS, CONCENTRATES, EDIBLES, TINCTURES, TOPICALS, ACCESSORIES, APPAREL, CBD, CLONES, PRE_ROLLS, SEEDS, NOT_APPLICABLE)
+      - StrainType (SATIVA, HYBRID, INDICA, HIGH_CBD)
+      - OrderType (PICKUP, DELIVERY)
+      - PricingType (RECREATIONAL, MEDICAL)
+  endpointsModeled:
+    note: >-
+      Referenced in Dutchie Plus documentation and the 2021-07 schema but not
+      exercised by the official example repo. Field names are representative and
+      flagged [MODELED] in the SDL and GraphQL guide.
+    graphql:
+      - 'query retailers -> [Retailer] (dispensaries/locations on the account)'
+      - 'query retailer(id: ID!) -> Retailer'
+      - 'query specials -> [Special] (active deals/promotions producing special prices)'
+    modeledTypes:
+      - Retailer (id, name, slug, status, address, hours, offerDelivery, offerAnyPickup, pricingTypes)
+      - Address (line1, line2, city, state, postalCode, country, latitude, longitude)
+      - RetailerHours (day, startTime, endTime, orderType)
+      - Special (id, name, description, type, startDate, endDate, menuScope)
+      - CheckoutTotals (subtotal, tax, discounts, total)
+  productNotes: |
+    Dutchie Plus produces "orders" by completing a Checkout: the Checkout carries a
+    redirectUrl used to finalize the compliant order (respecting inventory, taxes,
+    and per-state cannabis rules). There is no separate documented public "Orders"
+    or "Customers" query in the Plus headless surface exercised by the example;
+    customer/loyalty and POS transaction data live in Dutchie's separate POS API
+    (api.pos.dutchie.com), which is out of scope for this GraphQL entry.
+sources:
+  - url: https://plus.dutchie.com/plus/docs
+    type: Documentation
+    note: Dutchie Plus developer documentation and GraphQL reference.
+  - url: https://plus.dutchie.com/plus/2021-07/graphql
+    type: APIReference
+    note: GraphQL endpoint and playground (version 2021-07). GraphQL over HTTPS POST.
+  - url: https://github.com/GetDutchie/dutchie-plus-nextjs-example
+    type: SourceCode
+    note: >-
+      Official Dutchie Plus Next.js example. Source of the confirmed queries,
+      mutations, fragments, and enums. Uses Apollo HttpLink (HTTP), Bearer auth -
+      no WebSocket/subscription link.
+  - url: https://dutchie.com/plus
+    type: Website
+    note: Dutchie Plus product page (headless enterprise ecommerce).
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    Dutchie Plus is a GraphQL API with no documented WebSocket or GraphQL
+    subscription surface, so no AsyncAPI document was created. The entry is modeled
+    with graphql/ (SDL + guide) and no openapi/ directory, since the API is GraphQL
+    rather than REST. Confirmed operations come from the official example repo;
+    retailers and specials queries are flagged [MODELED].
