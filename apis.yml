@@ -119,6 +119,10 @@ apis:
     Checkout tracks its Items and returns a `redirectUrl` used to complete the
     compliant order. Confirmed against the official Dutchie Plus Next.js example.
 common:
+- type: VulnerabilityDisclosure
+  url: security/dutchie-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/dutchie-domain-security.yml
 - type: GitHubOrganization
   url: https://github.com/GetDutchie
 - type: LinkedIn
