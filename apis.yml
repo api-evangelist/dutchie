@@ -11,7 +11,19 @@ description: Dutchie is a cannabis retail technology platform providing point of
   compliance, inventory, taxes, and per-state rules. Requests are GraphQL POST
   operations authenticated with a per-retailer Bearer API key. Note - Dutchie has
   announced a 2026 sunset/deprecation of the Plus headless commerce API.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: paid
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Paid
+  confidence: medium
+  source:
+  - plans
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/dutchie.png
 tags:
 - Cannabis
 - Dispensary
