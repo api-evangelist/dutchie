@@ -28,6 +28,16 @@ tags:
 - Cannabis
 - Dispensary
 - Retail
+- E-Commerce
+- Point-of-Sale
+- Headless Commerce
+- GraphQL
+- Menus
+- Checkout
+tags_raw:
+- Cannabis
+- Dispensary
+- Retail
 - Ecommerce
 - Point of Sale
 - Headless Commerce
@@ -64,6 +74,12 @@ apis:
 - aid: dutchie:dutchie-plus-menu-api
   name: Dutchie Plus Menu API
   tags:
+  - Menus
+  - Product
+  - Variants
+  - Inventory
+  - GraphQL
+  tags_raw:
   - Menu
   - Products
   - Variants
@@ -110,6 +126,12 @@ apis:
 - aid: dutchie:dutchie-plus-checkout-api
   name: Dutchie Plus Checkout API
   tags:
+  - Checkout
+  - Cart
+  - Order
+  - Compliance
+  - GraphQL
+  tags_raw:
   - Checkout
   - Cart
   - Orders
