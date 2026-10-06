@@ -56,7 +56,7 @@ tags_raw:
 - Menu
 - Checkout
 created: '2026-07-03'
-modified: '2026-07-03'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 apis:
 - aid: dutchie:dutchie-plus-retailers-api
@@ -169,6 +169,8 @@ apis:
     Checkout tracks its Items and returns a `redirectUrl` used to complete the
     compliant order. Confirmed against the official Dutchie Plus Next.js example.
 common:
+- url: https://dutchie.com/business/blog
+  type: Blog
 - type: VulnerabilityDisclosure
   url: security/dutchie-vulnerability-disclosure.yml
 - type: DomainSecurity
