@@ -1,5 +1,5 @@
 generated: '2026-10-12'
-method: none
+method: searched
 source:
 - https://zapier.com/apps/dutchie/integrations
 - https://n8n.io/integrations/dutchie/
@@ -7,10 +7,653 @@ source:
 - https://monid.ai/tools/dutchie
 checked:
 - https://composio.dev/toolkits/dutchie
+- https://dutchie.com/business/integrations
 - https://monid.ai/tools/dutchie
 - https://n8n.io/integrations/dutchie/
+- https://www.metrc.com/validated-integrators/
 - https://zapier.com/apps/dutchie/integrations
 summary: null
-marketplace_apps: []
-edges: []
+marketplace_apps:
+- marketplace: own
+  channel: unknown
+  app: dutchie
+  url: https://dutchie.com/business/integrations
+  app_count: 94
+  adapter: sweep-regulated-retail.py:Webflow integration cards
+  listed: 20
+  note: 94 listings read; only domain-linked vendors are written
+edges:
+- partner_name: Metrc (validated integrators)
+  partner: null
+  partner_match: register
+  type: register
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://www.metrc.com/validated-integrators/
+  category: Cannabis track-and-trace
+  contract_reference:
+    register: Metrc Validated Integrators (metrc.com/validated-integrators, admin-ajax fetch_providers)
+    spec_file: null
+    standard: Metrc validated integrator (state cannabis track-and-trace)
+    role: metrc-validated-integrator
+    registered_name: Dutchie Point of Sale
+    register_id: Dutchie Point of Sale
+    website: https://dutchie.com/business
+    matched_domain: dutchie.com
+    matched_by: domain
+    metrc_categories:
+    - Point of sale (POS)
+    integrated_with:
+    - Metrc Connect
+    - Metrc Retail ID
+    signal_note: certified_products = one entry per STATE with Full or Partial Validation (level kept); Get Access
+      = API access only, participation; Metrc drops lapsed integrators, lapsed never set
+    detected_by: sweep-regulated-retail.py
+    detected: '2026-10-18'
+    certified_products:
+    - product: 'Metrc validated integration: Alaska'
+      state: Alaska
+      level: Full Validation
+    - product: 'Metrc validated integration: California'
+      state: California
+      level: Full Validation
+    - product: 'Metrc validated integration: Colorado'
+      state: Colorado
+      level: Full Validation
+    - product: 'Metrc validated integration: District of Columbia'
+      state: District of Columbia
+      level: Full Validation
+    - product: 'Metrc validated integration: Illinois'
+      state: Illinois
+      level: Full Validation
+    - product: 'Metrc validated integration: Kentucky'
+      state: Kentucky
+      level: Full Validation
+    - product: 'Metrc validated integration: Louisiana'
+      state: Louisiana
+      level: Full Validation
+    - product: 'Metrc validated integration: Maine'
+      state: Maine
+      level: Full Validation
+    - product: 'Metrc validated integration: Maryland'
+      state: Maryland
+      level: Full Validation
+    - product: 'Metrc validated integration: Massachusetts'
+      state: Massachusetts
+      level: Full Validation
+    - product: 'Metrc validated integration: Michigan'
+      state: Michigan
+      level: Full Validation
+    - product: 'Metrc validated integration: Minnesota'
+      state: Minnesota
+      level: Full Validation
+    - product: 'Metrc validated integration: Mississippi'
+      state: Mississippi
+      level: Full Validation
+    - product: 'Metrc validated integration: Missouri'
+      state: Missouri
+      level: Full Validation
+    - product: 'Metrc validated integration: Montana'
+      state: Montana
+      level: Full Validation
+    - product: 'Metrc validated integration: Nevada'
+      state: Nevada
+      level: Full Validation
+    - product: 'Metrc validated integration: New Jersey'
+      state: New Jersey
+      level: Full Validation
+    - product: 'Metrc validated integration: New York'
+      state: New York
+      level: Full Validation
+    - product: 'Metrc validated integration: Ohio'
+      state: Ohio
+      level: Full Validation
+    - product: 'Metrc validated integration: Oklahoma'
+      state: Oklahoma
+      level: Full Validation
+    - product: 'Metrc validated integration: Oregon'
+      state: Oregon
+      level: Full Validation
+    - product: 'Metrc validated integration: Rhode Island'
+      state: Rhode Island
+      level: Full Validation
+    - product: 'Metrc validated integration: South Dakota'
+      state: South Dakota
+      level: Full Validation
+    - product: 'Metrc validated integration: Virginia'
+      state: Virginia
+      level: Full Validation
+    - product: 'Metrc validated integration: West Virginia'
+      state: West Virginia
+      level: Full Validation
+  detected_by: sweep-regulated-retail.py
+  first_seen: '2026-10-18'
+- partner_name: Annex Cloud
+  app: Annex Cloud + Dutchie
+  partner: annex-cloud
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: unknown
+  relationship: platform-app
+  direction: unknown
+  evidence: https://dutchie.com/business/integrations
+  category: Cannabis retail integration
+  contract_reference:
+    register: Dutchie integrations directory (dutchie.com/business/integrations)
+    spec_file: null
+    role: dutchie-listed-integration
+    registered_name: Annex Cloud
+    matched_domain: annexcloud.com
+    matched_by: domain
+    dutchie_categories:
+    - loyalty
+    signal_note: 'builder not stated on the directory (Dutchie''s own connectors and partner-built ones are listed
+      alike): direction unknown, context only'
+    detected_by: sweep-regulated-retail.py
+    detected: '2026-10-18'
+  detected_by: sweep-regulated-retail.py
+  detected: '2026-10-18'
+- partner_name: Canix
+  app: Canix + Dutchie
+  partner: canix
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: unknown
+  relationship: platform-app
+  direction: unknown
+  evidence: https://dutchie.com/business/integrations
+  category: Cannabis retail integration
+  contract_reference:
+    register: Dutchie integrations directory (dutchie.com/business/integrations)
+    spec_file: null
+    role: dutchie-listed-integration
+    registered_name: Canix
+    matched_domain: canix.com
+    matched_by: domain
+    dutchie_categories:
+    - cultivation
+    signal_note: 'builder not stated on the directory (Dutchie''s own connectors and partner-built ones are listed
+      alike): direction unknown, context only'
+    detected_by: sweep-regulated-retail.py
+    detected: '2026-10-18'
+  detected_by: sweep-regulated-retail.py
+  detected: '2026-10-18'
+- partner_name: Distru
+  app: Distru + Dutchie
+  partner: distru
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: unknown
+  relationship: platform-app
+  direction: unknown
+  evidence: https://dutchie.com/business/integrations
+  category: Cannabis retail integration
+  contract_reference:
+    register: Dutchie integrations directory (dutchie.com/business/integrations)
+    spec_file: null
+    role: dutchie-listed-integration
+    registered_name: Distru
+    matched_domain: distru.com
+    matched_by: domain
+    dutchie_categories:
+    - cultivation
+    signal_note: 'builder not stated on the directory (Dutchie''s own connectors and partner-built ones are listed
+      alike): direction unknown, context only'
+    detected_by: sweep-regulated-retail.py
+    detected: '2026-10-18'
+  detected_by: sweep-regulated-retail.py
+  detected: '2026-10-18'
+- partner_name: Greencheck
+  app: Greencheck + Dutchie
+  partner: green-check-verified
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: unknown
+  relationship: platform-app
+  direction: unknown
+  evidence: https://dutchie.com/business/integrations
+  category: Cannabis retail integration
+  contract_reference:
+    register: Dutchie integrations directory (dutchie.com/business/integrations)
+    spec_file: null
+    role: dutchie-listed-integration
+    registered_name: Greencheck
+    matched_domain: greencheckverified.com
+    matched_by: domain
+    dutchie_categories:
+    - operational-data
+    signal_note: 'builder not stated on the directory (Dutchie''s own connectors and partner-built ones are listed
+      alike): direction unknown, context only'
+    detected_by: sweep-regulated-retail.py
+    detected: '2026-10-18'
+  detected_by: sweep-regulated-retail.py
+  detected: '2026-10-18'
+- partner_name: Happy Cabbage
+  app: Happy Cabbage + Dutchie
+  partner: happy-cabbage-analytics
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: unknown
+  relationship: platform-app
+  direction: unknown
+  evidence: https://dutchie.com/business/integrations
+  category: Cannabis retail integration
+  contract_reference:
+    register: Dutchie integrations directory (dutchie.com/business/integrations)
+    spec_file: null
+    role: dutchie-listed-integration
+    registered_name: Happy Cabbage
+    matched_domain: happycabbage.io
+    matched_by: domain
+    dutchie_categories:
+    - analytics
+    - marketing
+    - operational-data
+    signal_note: 'builder not stated on the directory (Dutchie''s own connectors and partner-built ones are listed
+      alike): direction unknown, context only'
+    detected_by: sweep-regulated-retail.py
+    detected: '2026-10-18'
+  detected_by: sweep-regulated-retail.py
+  detected: '2026-10-18'
+- partner_name: HubSpot
+  app: HubSpot + Dutchie
+  partner: hubspot
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: unknown
+  relationship: platform-app
+  direction: unknown
+  evidence: https://dutchie.com/business/integrations
+  category: Cannabis retail integration
+  contract_reference:
+    register: Dutchie integrations directory (dutchie.com/business/integrations)
+    spec_file: null
+    role: dutchie-listed-integration
+    registered_name: HubSpot
+    matched_domain: hubspot.com
+    matched_by: domain
+    dutchie_categories:
+    - crm
+    - marketing
+    signal_note: 'builder not stated on the directory (Dutchie''s own connectors and partner-built ones are listed
+      alike): direction unknown, context only'
+    detected_by: sweep-regulated-retail.py
+    detected: '2026-10-18'
+  detected_by: sweep-regulated-retail.py
+  detected: '2026-10-18'
+- partner_name: I Heart Jane
+  app: I Heart Jane + Dutchie
+  partner: iheartjane
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: unknown
+  relationship: platform-app
+  direction: unknown
+  evidence: https://dutchie.com/business/integrations
+  category: Cannabis retail integration
+  contract_reference:
+    register: Dutchie integrations directory (dutchie.com/business/integrations)
+    spec_file: null
+    role: dutchie-listed-integration
+    registered_name: I Heart Jane
+    matched_domain: iheartjane.com
+    matched_by: domain
+    dutchie_categories:
+    - ecommerce
+    - in-store-menus
+    signal_note: 'builder not stated on the directory (Dutchie''s own connectors and partner-built ones are listed
+      alike): direction unknown, context only'
+    detected_by: sweep-regulated-retail.py
+    detected: '2026-10-18'
+  detected_by: sweep-regulated-retail.py
+  detected: '2026-10-18'
+- partner_name: Klaviyo
+  app: Klaviyo + Dutchie
+  partner: klaviyo
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: unknown
+  relationship: platform-app
+  direction: unknown
+  evidence: https://dutchie.com/business/integrations
+  category: Cannabis retail integration
+  contract_reference:
+    register: Dutchie integrations directory (dutchie.com/business/integrations)
+    spec_file: null
+    role: dutchie-listed-integration
+    registered_name: Klaviyo
+    matched_domain: klaviyo.com
+    matched_by: domain
+    dutchie_categories:
+    - crm
+    - marketing
+    signal_note: 'builder not stated on the directory (Dutchie''s own connectors and partner-built ones are listed
+      alike): direction unknown, context only'
+    detected_by: sweep-regulated-retail.py
+    detected: '2026-10-18'
+  detected_by: sweep-regulated-retail.py
+  detected: '2026-10-18'
+- partner_name: LeafLink
+  app: LeafLink + Dutchie
+  partner: leaflink
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: unknown
+  relationship: platform-app
+  direction: unknown
+  evidence: https://dutchie.com/business/integrations
+  category: Cannabis retail integration
+  contract_reference:
+    register: Dutchie integrations directory (dutchie.com/business/integrations)
+    spec_file: null
+    role: dutchie-listed-integration
+    registered_name: LeafLink
+    matched_domain: leaflink.com
+    matched_by: domain
+    dutchie_categories:
+    - whole-sale
+    signal_note: 'builder not stated on the directory (Dutchie''s own connectors and partner-built ones are listed
+      alike): direction unknown, context only'
+    detected_by: sweep-regulated-retail.py
+    detected: '2026-10-18'
+  detected_by: sweep-regulated-retail.py
+  detected: '2026-10-18'
+- partner_name: Leafly
+  app: Leafly + Dutchie
+  partner: leafly
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: unknown
+  relationship: platform-app
+  direction: unknown
+  evidence: https://dutchie.com/business/integrations
+  category: Cannabis retail integration
+  contract_reference:
+    register: Dutchie integrations directory (dutchie.com/business/integrations)
+    spec_file: null
+    role: dutchie-listed-integration
+    registered_name: Leafly
+    matched_domain: leafly.com
+    matched_by: domain
+    dutchie_categories:
+    - marketplace
+    signal_note: 'builder not stated on the directory (Dutchie''s own connectors and partner-built ones are listed
+      alike): direction unknown, context only'
+    detected_by: sweep-regulated-retail.py
+    detected: '2026-10-18'
+  detected_by: sweep-regulated-retail.py
+  detected: '2026-10-18'
+- partner_name: Moneris
+  app: Moneris + Dutchie
+  partner: moneris
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: unknown
+  relationship: platform-app
+  direction: unknown
+  evidence: https://dutchie.com/business/integrations
+  category: Cannabis retail integration
+  contract_reference:
+    register: Dutchie integrations directory (dutchie.com/business/integrations)
+    spec_file: null
+    role: dutchie-listed-integration
+    registered_name: Moneris
+    matched_domain: moneris.com
+    matched_by: domain
+    dutchie_categories:
+    - payments
+    signal_note: 'builder not stated on the directory (Dutchie''s own connectors and partner-built ones are listed
+      alike): direction unknown, context only'
+    detected_by: sweep-regulated-retail.py
+    detected: '2026-10-18'
+  detected_by: sweep-regulated-retail.py
+  detected: '2026-10-18'
+- partner_name: NABIS
+  app: NABIS + Dutchie
+  partner: nabis
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: unknown
+  relationship: platform-app
+  direction: unknown
+  evidence: https://dutchie.com/business/integrations
+  category: Cannabis retail integration
+  contract_reference:
+    register: Dutchie integrations directory (dutchie.com/business/integrations)
+    spec_file: null
+    role: dutchie-listed-integration
+    registered_name: NABIS
+    matched_domain: nabis.com
+    matched_by: domain
+    dutchie_categories:
+    - whole-sale
+    signal_note: 'builder not stated on the directory (Dutchie''s own connectors and partner-built ones are listed
+      alike): direction unknown, context only'
+    detected_by: sweep-regulated-retail.py
+    detected: '2026-10-18'
+  detected_by: sweep-regulated-retail.py
+  detected: '2026-10-18'
+- partner_name: NetSuite
+  app: NetSuite + Dutchie
+  partner: netsuite
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: unknown
+  relationship: platform-app
+  direction: unknown
+  evidence: https://dutchie.com/business/integrations
+  category: Cannabis retail integration
+  contract_reference:
+    register: Dutchie integrations directory (dutchie.com/business/integrations)
+    spec_file: null
+    role: dutchie-listed-integration
+    registered_name: NetSuite
+    matched_domain: netsuite.com
+    matched_by: domain
+    dutchie_categories:
+    - analytics
+    - operational-data
+    signal_note: 'builder not stated on the directory (Dutchie''s own connectors and partner-built ones are listed
+      alike): direction unknown, context only'
+    detected_by: sweep-regulated-retail.py
+    detected: '2026-10-18'
+  detected_by: sweep-regulated-retail.py
+  detected: '2026-10-18'
+- partner_name: OnFleet
+  app: OnFleet + Dutchie
+  partner: onfleet
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: unknown
+  relationship: platform-app
+  direction: unknown
+  evidence: https://dutchie.com/business/integrations
+  category: Cannabis retail integration
+  contract_reference:
+    register: Dutchie integrations directory (dutchie.com/business/integrations)
+    spec_file: null
+    role: dutchie-listed-integration
+    registered_name: OnFleet
+    matched_domain: onfleet.com
+    matched_by: domain
+    dutchie_categories:
+    - delivery
+    signal_note: 'builder not stated on the directory (Dutchie''s own connectors and partner-built ones are listed
+      alike): direction unknown, context only'
+    detected_by: sweep-regulated-retail.py
+    detected: '2026-10-18'
+  detected_by: sweep-regulated-retail.py
+  detected: '2026-10-18'
+- partner_name: Quickbooks
+  app: Quickbooks + Dutchie
+  partner: quickbooks
+  partner_match: domain+name-among-holders
+  type: marketplace
+  marketplace: own
+  channel: unknown
+  relationship: platform-app
+  direction: unknown
+  evidence: https://dutchie.com/business/integrations
+  category: Cannabis retail integration
+  contract_reference:
+    register: Dutchie integrations directory (dutchie.com/business/integrations)
+    spec_file: null
+    role: dutchie-listed-integration
+    registered_name: Quickbooks
+    matched_domain: intuit.com
+    matched_by: domain+name-among-holders
+    dutchie_categories:
+    - accounting
+    signal_note: 'builder not stated on the directory (Dutchie''s own connectors and partner-built ones are listed
+      alike): direction unknown, context only'
+    detected_by: sweep-regulated-retail.py
+    detected: '2026-10-18'
+  detected_by: sweep-regulated-retail.py
+  detected: '2026-10-18'
+- partner_name: Shopify
+  app: Shopify + Dutchie
+  partner: shopify
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: unknown
+  relationship: platform-app
+  direction: unknown
+  evidence: https://dutchie.com/business/integrations
+  category: Cannabis retail integration
+  contract_reference:
+    register: Dutchie integrations directory (dutchie.com/business/integrations)
+    spec_file: null
+    role: dutchie-listed-integration
+    registered_name: Shopify
+    matched_domain: shopify.com
+    matched_by: domain
+    dutchie_categories:
+    - ecommerce
+    signal_note: 'builder not stated on the directory (Dutchie''s own connectors and partner-built ones are listed
+      alike): direction unknown, context only'
+    detected_by: sweep-regulated-retail.py
+    detected: '2026-10-18'
+  detected_by: sweep-regulated-retail.py
+  detected: '2026-10-18'
+- partner_name: Tattle
+  app: Tattle + Dutchie
+  partner: tattle
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: unknown
+  relationship: platform-app
+  direction: unknown
+  evidence: https://dutchie.com/business/integrations
+  category: Cannabis retail integration
+  contract_reference:
+    register: Dutchie integrations directory (dutchie.com/business/integrations)
+    spec_file: null
+    role: dutchie-listed-integration
+    registered_name: Tattle
+    matched_domain: tattleapp.com
+    matched_by: domain
+    dutchie_categories:
+    - operational-data
+    signal_note: 'builder not stated on the directory (Dutchie''s own connectors and partner-built ones are listed
+      alike): direction unknown, context only'
+    detected_by: sweep-regulated-retail.py
+    detected: '2026-10-18'
+  detected_by: sweep-regulated-retail.py
+  detected: '2026-10-18'
+- partner_name: Treez
+  app: Treez + Dutchie
+  partner: treez
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: unknown
+  relationship: platform-app
+  direction: unknown
+  evidence: https://dutchie.com/business/integrations
+  category: Cannabis retail integration
+  contract_reference:
+    register: Dutchie integrations directory (dutchie.com/business/integrations)
+    spec_file: null
+    role: dutchie-listed-integration
+    registered_name: Treez
+    matched_domain: treez.io
+    matched_by: domain
+    dutchie_categories:
+    - point-of-sale
+    signal_note: 'builder not stated on the directory (Dutchie''s own connectors and partner-built ones are listed
+      alike): direction unknown, context only'
+    detected_by: sweep-regulated-retail.py
+    detected: '2026-10-18'
+  detected_by: sweep-regulated-retail.py
+  detected: '2026-10-18'
+- partner_name: Vend
+  app: Vend + Dutchie
+  partner: vend
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: unknown
+  relationship: platform-app
+  direction: unknown
+  evidence: https://dutchie.com/business/integrations
+  category: Cannabis retail integration
+  contract_reference:
+    register: Dutchie integrations directory (dutchie.com/business/integrations)
+    spec_file: null
+    role: dutchie-listed-integration
+    registered_name: Vend
+    matched_domain: vendhq.com
+    matched_by: domain
+    dutchie_categories:
+    - point-of-sale
+    signal_note: 'builder not stated on the directory (Dutchie''s own connectors and partner-built ones are listed
+      alike): direction unknown, context only'
+    detected_by: sweep-regulated-retail.py
+    detected: '2026-10-18'
+  detected_by: sweep-regulated-retail.py
+  detected: '2026-10-18'
+- partner_name: Weedmaps
+  app: Weedmaps + Dutchie
+  partner: weedmaps
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: unknown
+  relationship: platform-app
+  direction: unknown
+  evidence: https://dutchie.com/business/integrations
+  category: Cannabis retail integration
+  contract_reference:
+    register: Dutchie integrations directory (dutchie.com/business/integrations)
+    spec_file: null
+    role: dutchie-listed-integration
+    registered_name: Weedmaps
+    matched_domain: weedmaps.com
+    matched_by: domain
+    dutchie_categories:
+    - marketing
+    - marketplace
+    signal_note: 'builder not stated on the directory (Dutchie''s own connectors and partner-built ones are listed
+      alike): direction unknown, context only'
+    detected_by: sweep-regulated-retail.py
+    detected: '2026-10-18'
+  detected_by: sweep-regulated-retail.py
+  detected: '2026-10-18'
 templates: []
