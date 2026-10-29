@@ -1,4 +1,4 @@
-# Dutchie (dutchie)
+# Dutchie
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,137 +64,120 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Dutchie is a cannabis retail technology platform providing point of sale, ecommerce, and payments for dispensaries. Its headless commerce product, **Dutchie Plus**, is a **GraphQL-first** API (endpoint `https://plus.dutchie.com/plus/2021-07/graphql`) that lets developers build fully custom, branded dispensary storefronts against Dutchie's ecommerce backend: query retailer menus, products, variants, potency, and specials, and drive a stateful cart/checkout that respects cannabis compliance, inventory, taxes, and per-state rules. Requests are GraphQL POST operations authenticated with a per-retailer Bearer API key.
+Dutchie is a cannabis retail technology platform providing point of sale, ecommerce, and payments for dispensaries. Its headless commerce product, Dutchie Plus, exposes a GraphQL API (endpoint https://plus.dutchie.com/plus/2021-07/graphql) that lets developers build fully custom, branded dispensary storefronts against Dutchie's ecommerce backend - querying retailer menus, products, variants, potency, and specials, and driving a stateful cart/checkout that respects cannabis compliance, inventory, taxes, and per-state rules. Requests are GraphQL POST operations authenticated with a per-retailer Bearer API key. Note - Dutchie has announced a 2026 sunset/deprecation of the Plus headless commerce API.
 
-> **GraphQL-first:** This entry is modeled with a `graphql/` directory (SDL + query guide) rather than `openapi/`, because Dutchie Plus is a GraphQL API, not REST.
+**Areas:** Cannabis · Dispensary · Retail · E-Commerce · Point-of-Sale · Headless Commerce · GraphQL · Menus · Checkout
 
-> **Sunset notice:** Dutchie has announced a 2026 sunset/deprecation of the Plus headless commerce API. Confirm availability with Dutchie before building against it.
+## Dutchie on APIs.io
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/dutchie/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/dutchie/refs/heads/main/apis.yml)
+Everything profiled for Dutchie is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/dutchie/](https://apis.io/providers/dutchie/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (4)
 
-- Cannabis
-- Dispensary
-- Retail
-- Ecommerce
-- Point of Sale
-- Headless Commerce
-- GraphQL
-- Menu
-- Checkout
+- [Dutchie Plus Retailers API](https://apis.io/apis/dutchie/dutchie-plus-retailers-api/) — GraphQL queries for the dispensaries/retailers connected to your Dutchie Plus account - retailer metadata, address, hours, accepted order types…
+- [Dutchie Plus Menu API](https://apis.io/apis/dutchie/dutchie-plus-menu-api/) — The core headless-storefront query. `menu(filter, pagination)` returns a retailer's live product catalog - each Product carries brand, category, strainType,…
+- [Dutchie Plus Specials API](https://apis.io/apis/dutchie/dutchie-plus-specials-api/) — GraphQL queries for a retailer's active specials, deals, and promotions - the discount programs surfaced on the menu that produce the special variant prices…
+- [Dutchie Plus Checkout API](https://apis.io/apis/dutchie/dutchie-plus-checkout-api/) — The stateful cart and order lifecycle via GraphQL mutations - `createCheckout`, `addItem`, `updateQuantity`, `removeItem`, and `updateCheckout` (order type…
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-07-03
-- **Modified:** 2026-07-03
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### GraphQL (1)
 
-All four logical APIs share one GraphQL endpoint (`https://plus.dutchie.com/plus/2021-07/graphql`) and Bearer (per-retailer API key) auth. Menu and Checkout operations are **confirmed** against the official [Dutchie Plus Next.js example](https://github.com/GetDutchie/dutchie-plus-nextjs-example); Retailers and Specials are **modeled** from Dutchie Plus documentation and the 2021-07 schema.
+GraphQL schemas.
 
-### Dutchie Plus Retailers API
+- [Dutchie Plus GraphQL API](https://apis.io/graphqls/dutchie/dutchie-graphql/)
 
-GraphQL queries for the dispensaries/retailers connected to your Dutchie Plus account - retailer metadata, address, hours, order types (pickup/delivery), and pricing types (recreational/medical). The retailer scope is established by the per-retailer API key. *(Modeled.)*
+#### Collections (1)
 
-- **Human URL:** [https://plus.dutchie.com/plus/docs](https://plus.dutchie.com/plus/docs)
-- **Base URL:** `https://plus.dutchie.com/plus/2021-07/graphql`
+Postman and Open Collection request collections.
 
-#### Tags
+- [Dutchie Plus GraphQL API](https://apis.io/collections/dutchie/open-dutchie/)
 
-- Retailers
-- Dispensaries
-- Locations
-- GraphQL
+#### Security (2)
 
-#### Properties
+Authentication, trust centre, and vulnerability disclosure.
 
-- [Documentation](https://plus.dutchie.com/plus/docs)
-- [GraphQL Guide](graphql/dutchie-graphql.md)
-- [GraphQL Schema](graphql/dutchie-schema.graphql)
-- [Postman Collection](collections/dutchie.postman_collection.json)
-- [Open Collection](collections/dutchie.opencollection.json)
+- [Dutchie Domain Security](https://apis.io/security/dutchie/dutchie-domain-security/)
+- [Dutchie Vulnerability Disclosure](https://apis.io/security/dutchie/dutchie-vulnerability-disclosure/)
 
-### Dutchie Plus Menu API
+#### Plans and pricing (1)
 
-The core headless-storefront query. `menu(filter, pagination)` returns a retailer's live product catalog - each Product carries brand, category, strainType, description, image, CBD/THC potency, and priced variants (option, priceRec, priceMed, and special prices). *(Confirmed.)*
+Published plans, tiers and prices.
 
-- **Human URL:** [https://plus.dutchie.com/plus/docs](https://plus.dutchie.com/plus/docs)
-- **Base URL:** `https://plus.dutchie.com/plus/2021-07/graphql`
+- [Dutchie Plans Pricing](https://apis.io/plans/dutchie/dutchie-plans-pricing/)
 
-#### Tags
+#### Rate limits (1)
 
-- Menu
-- Products
-- Variants
-- Inventory
-- GraphQL
+Published request limits.
 
-#### Properties
+- [Dutchie Rate Limits](https://apis.io/rate-limits/dutchie/dutchie-rate-limits/)
 
-- [Documentation](https://plus.dutchie.com/plus/docs)
-- [GraphQL Guide](graphql/dutchie-graphql.md)
-- [GraphQL Schema](graphql/dutchie-schema.graphql)
-- [Postman Collection](collections/dutchie.postman_collection.json)
-- [Open Collection](collections/dutchie.opencollection.json)
+#### FinOps (1)
 
-### Dutchie Plus Specials API
+What the API costs to run, by operation.
 
-GraphQL queries for a retailer's active specials, deals, and promotions - the discount programs that produce the special variant prices (`specialPriceRec` / `specialPriceMed`) returned by the Menu API. *(Modeled; the special-price fields themselves are confirmed on the Product variant type.)*
+- [Dutchie Finops](https://apis.io/finops/dutchie/dutchie-finops/)
 
-- **Human URL:** [https://plus.dutchie.com/plus/docs](https://plus.dutchie.com/plus/docs)
-- **Base URL:** `https://plus.dutchie.com/plus/2021-07/graphql`
+## Where to find this API
 
-#### Tags
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-- Specials
-- Deals
-- Promotions
-- Discounts
-- GraphQL
-
-#### Properties
-
-- [Documentation](https://plus.dutchie.com/plus/docs)
-- [GraphQL Guide](graphql/dutchie-graphql.md)
-- [GraphQL Schema](graphql/dutchie-schema.graphql)
-- [Postman Collection](collections/dutchie.postman_collection.json)
-- [Open Collection](collections/dutchie.opencollection.json)
-
-### Dutchie Plus Checkout API
-
-The stateful cart and order lifecycle via GraphQL mutations - `createCheckout`, `addItem`, `updateQuantity`, `removeItem`, and `updateCheckout`, plus the `checkout(id)` query. A Checkout tracks its Items and returns a `redirectUrl` used to complete the compliant order. *(Confirmed.)*
-
-- **Human URL:** [https://plus.dutchie.com/plus/docs](https://plus.dutchie.com/plus/docs)
-- **Base URL:** `https://plus.dutchie.com/plus/2021-07/graphql`
-
-#### Tags
-
-- Checkout
-- Cart
-- Orders
-- Compliance
-- GraphQL
-
-#### Properties
-
-- [Documentation](https://plus.dutchie.com/plus/docs)
-- [GraphQL Guide](graphql/dutchie-graphql.md)
-- [GraphQL Schema](graphql/dutchie-schema.graphql)
-- [Postman Collection](collections/dutchie.postman_collection.json)
-- [Open Collection](collections/dutchie.opencollection.json)
-
-## Common Properties
-
-- [GitHub Organization](https://github.com/GetDutchie)
-- [LinkedIn](https://www.linkedin.com/company/dutchie)
 - [Website](https://dutchie.com)
 - [Documentation](https://plus.dutchie.com/plus/docs)
-- [Plans](plans/dutchie-plans-pricing.yml)
-- [Rate Limits](rate-limits/dutchie-rate-limits.yml)
-- [Fin Ops](finops/dutchie-finops.yml)
+- [Blog](https://dutchie.com/business/blog)
+- [GitHub](https://github.com/GetDutchie)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 17.2** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 71.4 |
+| Contract quality | 35.1 |
+| Contract governance | 0.0 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 2.4 |
+| Access clarity | 5.3 |
+
+**Agent readiness 13.6** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | — |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 10.7** — Payments
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/dutchie/](https://apis.io/providers/dutchie/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Dutchie: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/dutchie/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
